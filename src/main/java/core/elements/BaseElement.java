@@ -28,11 +28,6 @@ public class BaseElement {
 		name = elementName;
 	}
 
-	public RemoteWebElement getElement() {
-		waitForIsElementPresent();
-		return element;
-	}
-
 	public void waitForIsElementPresent() {
 		isPresent(DEFAULT_TIMEOUT);
 		if (!element.isEnabled()) {

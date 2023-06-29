@@ -13,9 +13,4 @@ public class Button extends BaseElement {
 		element.click();
 	}
 
-	public String getTextFromButton() {
-		waitForIsElementPresent();
-		return element.getText();
-	}
-
 }

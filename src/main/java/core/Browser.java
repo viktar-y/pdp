@@ -1,12 +1,8 @@
 package core;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.util.concurrent.TimeUnit;
-
-import static properties.Properties.DEFAULT_TIMEOUT;
 
 public class Browser {
 	private static Browser instance;
@@ -38,11 +34,6 @@ public class Browser {
 		driver.get(url);
 	}
 
-	public void scrollDown(int value) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(String.format("window.scrollBy(0,%d)", value), "");
-	}
-
 	public void exit() {
 		try {
 			driver.quit();
@@ -56,7 +47,4 @@ public class Browser {
 	public void refreshPage() {
 		driver.navigate().refresh();
 	}
-
-
-
 }

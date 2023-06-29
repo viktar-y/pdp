@@ -11,27 +11,27 @@ public class MobilePhonesPage extends BasePage {
 	Button mostExpensiveOptionButton = new Button(By.xpath("//span[contains(text(), 'Дорогие')]"), "Most Expensive ");
 	Button resetFiltersButton = new Button(By.xpath("//span[@data-bind = 'click: $root.doMoved.bind($root)']"), "Reset all filters");
 	Button addPrime = new Button(By.xpath("//label[@class='schema-filter__bonus-item schema-filter__bonus-item_primary']"), "Button add Prime");
-	Button primeLabel = new Button(By.xpath("//span[@class='schema-tags__text' and text()='Príme']"), "Prime label");
-	Button chooseDeliveryDestinationButton = new Button(By.xpath("//span[@class = 'schema-filter__link schema-filter__link_secondary schema-filter__link_small']"), "Delivery destination");
-	Button changedCity = new Button(By.xpath("//a[@class = 'schema-filter__link schema-filter__link_primary-alter schema-filter__link_small-alter schema-filter__link_nodecor']"), "Changed city");
+	Tag primeTag = new Tag(By.xpath("//span[@class='schema-tags__text' and text()='Príme']"), "Prime label");
+	Link chooseDeliveryDestinationLink = new Link(By.xpath("//span[@class = 'schema-filter__link schema-filter__link_secondary schema-filter__link_small']"), "Delivery destination");
+	Link changedCity = new Link(By.xpath("//a[@class = 'schema-filter__link schema-filter__link_primary-alter schema-filter__link_small-alter schema-filter__link_nodecor']"), "Changed city");
 	TextField inputCityField = new TextField(By.xpath("//input[@placeholder = 'Укажите ваш населенный пункт']"), "City input");
 	Button confirmChangeDestination = new Button(By.xpath("//button[contains(@class, 'auth-button')]"), "Change destination");
 	TextField priceFromField = new TextField(By.xpath("//input[contains(@placeholder, 'от') and contains(@class, 'schema-filter__number-input_price')]"), "Price from field");
 	TextField priceToField = new TextField(By.xpath("//input[contains(@data-bind, 'до') and contains(@class, 'number-input_price')]"), "Price to field");
-	Button searchTagButton = new Button(By.xpath("//span[@class = 'schema-tags__text']"), "search tag");
-	Button smartphoneTagButton = new Button(By.xpath("//span[@class='schema-tags__text' and text()='смартфон']"), "Smartphone tag");
+	Tag searchTag = new Tag(By.xpath("//span[@class = 'schema-tags__text']"), "search tag");
+	Tag smartphoneTag = new Tag(By.xpath("//span[@class='schema-tags__text' and text()='смартфон']"), "Smartphone tag");
 	Label countOfItems = new Label(By.xpath("//span[@class = 'schema-filter-button__sub schema-filter-button__sub_main']"), "Count of deals");
 	Button openItemButton = new Button(By.xpath("//a[@class='schema-product__button button button_orange js-product-price-link']"), "Open item button");
 	Button confirmFilterReset = new Button(By.xpath("//span[@class='schema-filter-button__sub']"), "Confirm reset");
-	Button cityOffered = new Button(By.xpath("//div[@class = 'auth-dropdown_container']"), "City offered");
-	Button countOfItemsUploadingButton = new Button(By.xpath("//div[contains(@class, 'schema-filter-button__state_animated')]"), "Count of deals with uploading");
+	MenuButton cityOfferedMenuButton = new MenuButton(By.xpath("//div[@class = 'auth-dropdown_container']"), "City offered");
+	Image countOfItemsUploading = new Image(By.xpath("//div[contains(@class, 'schema-filter-button__state_animated')]"), "Count of deals with uploading");
 
 	public MobilePhonesPage() {
 		super(By.xpath("//h1"), "Mobile phones page");
 	}
 
 	public boolean isSmartphoneTagShown() {
-		return smartphoneTagButton.isPresent(DEFAULT_TIMEOUT);
+		return smartphoneTag.isPresent(DEFAULT_TIMEOUT);
 	}
 
 	public void expandSortingMenu() {
@@ -47,13 +47,13 @@ public class MobilePhonesPage extends BasePage {
 	}
 
 	public void openChangeDestinationWindow() {
-		chooseDeliveryDestinationButton.clickOnButton();
+		chooseDeliveryDestinationLink.followLink();
 	}
 
 	public void enterNewDestination(String value) {
 		inputCityField.typeInField(value);
-		if (cityOffered.isPresent(DEFAULT_TIMEOUT)) {
-			cityOffered.clickOnButton();
+		if (cityOfferedMenuButton.isPresent(DEFAULT_TIMEOUT)) {
+			cityOfferedMenuButton.clickMenuButton();
 		} else {
 			inputCityField.typeInField(Keys.DOWN);
 			inputCityField.typeInField(Keys.ENTER);
@@ -66,19 +66,19 @@ public class MobilePhonesPage extends BasePage {
 	}
 
 	public boolean isPrimeLabelShown() {
-		return primeLabel.isPresent(DEFAULT_TIMEOUT);
+		return primeTag.isPresent(DEFAULT_TIMEOUT);
 	}
 
 	public void removePrimeLabel() {
-		primeLabel.clickOnButton();
+		primeTag.clickOnTag();
 	}
 
 	public String getTextDelivery() {
-		return changedCity.getTextFromButton();
+		return changedCity.getTextFromLink();
 	}
 
 	public int getCountOfDeals() {
-		if (countOfItemsUploadingButton.isPresent(DEFAULT_TIMEOUT)) {
+		if (countOfItemsUploading.isPresent(DEFAULT_TIMEOUT)) {
 			countOfItems.waitForIsElementPresent();
 		}
 		String count;
@@ -102,9 +102,7 @@ public class MobilePhonesPage extends BasePage {
 	}
 
 	public String getTagText() {
-		return searchTagButton.getTextFromButton().replaceAll("[^0-9]", "");
+		return searchTag.getTextFromTag().replaceAll("[^0-9]", "");
 	}
-	
-	
 
 }

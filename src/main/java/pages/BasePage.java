@@ -4,13 +4,7 @@ import core.Browser;
 import core.Logger;
 import core.elements.Label;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static properties.Properties.DEFAULT_TIMEOUT;
 
 abstract class BasePage {
 	private final By locator;
@@ -34,10 +28,6 @@ abstract class BasePage {
 
 	public void refreshPage() {
 		Browser.getInstance().refreshPage();
-	}
-
-	public void waitForUploading() {
-		Browser.getInstance().getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(DEFAULT_TIMEOUT));
 	}
 
 }

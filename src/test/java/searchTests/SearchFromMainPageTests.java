@@ -12,7 +12,6 @@ public class SearchFromMainPageTests extends BaseTest {
 		MainPage mainPage = new MainPage();
 		mainPage.searchItem("iPhone 14");
 		mainPage.openFirstItem();
-//		mainPage.openFirstItem();
 		ItemPage itemPage = new ItemPage();
 		Assertions.assertTrue(itemPage.isItemImageShown());
 	}

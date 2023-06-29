@@ -35,4 +35,5 @@ public class WeatherTests extends BaseTest {
 		double currentTemperature = weatherPage.getAVGTemperatureValue();
 		FileProcessor.writeValueToFile(String.valueOf(currentTemperature), AVG_TEMP_FILE_PATH);
 	}
+
 }

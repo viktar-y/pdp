@@ -9,4 +9,5 @@ public class CurrentDataTime {
 		Date now = new Date();
 		return dateFormat.format(now);
 	}
+
 }
