@@ -12,22 +12,22 @@ public class LoginPage extends BasePage {
 	CheckBox recaptchaCheckbox = new CheckBox(By.xpath("//div[@class = 'recaptcha-checkbox-border']"), "Recaptcha checkbox");
 
 	public LoginPage() {
-		super(By.xpath("//div[@class = 'auth-form__title auth-form__title_big auth-form__title_condensed-default']"), "Login Page");
+		super(By.xpath("//div[text()='Вход']"), "Login Page");
 	}
 
-	public void enterLogin(String value) {
+	public void typeLoginIntoField(String value) {
 		loginField.typeInField(value);
 	}
 
-	public void enterPassword(String value) {
+	public void typePasswordIntoField(String value) {
 		passwordField.typeInField(value);
 	}
 
-	public void confirmLogin() {
+	public void clickOnConfirmLoginButton() {
 		loginButton.clickOnButton();
 	}
 
-	public void iAmNotRobot() {
+	public void checkThatIAmNotRobot() {
 		recaptchaCheckbox.check();
 	}
 

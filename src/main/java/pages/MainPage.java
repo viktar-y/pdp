@@ -1,53 +1,48 @@
 package pages;
 
-import core.elements.Button;
-import core.elements.Image;
-import core.elements.Link;
-import core.elements.TextField;
+import core.elements.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-
-import static properties.Properties.DEFAULT_TIMEOUT;
 
 public class MainPage extends BasePage{
 	TextField searchField = new TextField(By.xpath("//input[contains(@class, 'fast-search__input')]"), "Search field");
 	Link loginLink = new Link(By.xpath("//div[contains(text(), 'Вход')]"), " Login ");
-	Button userMenuButton = new Button(By.xpath("$x(//a[@class = 'b-top-profile__preview js-toggle-bar'])"), "User's menu ");
+	Button userMenuButton = new Button(By.cssSelector(".b-top-profile__image"), "User's menu ");
 	Link basketLink = new Link(By.xpath("//a[@title = 'Корзина']"), "Shopping basket ");
-	Link catalogLink = new Link(By.xpath("//a[@class='b-main-navigation__link' and @href='https://catalog.onliner.by']"), "Catalog page ");
-	Button profileButton = new Button(By.xpath("//a[@href = 'https://profile.onliner.by' and contains(@class, 'b-top-profile__link b-top-profile__link_alter')])"), "User's profile ");
-	Link walletNewsLink = new Link(By.xpath("//h2/a[@href = 'https://money.onliner.by' and contains(text(), 'Кошелек')]"), "Wallet news page ");
-	Image usersAvatarImage = new Image(By.xpath("//div[@class = 'b-top-profile__image js-header-user-avatar']"), "User's avatar");
+	Link catalogLink = new Link(By.xpath("//span[text()='Каталог']"), "Catalog page ");
+	Button profileButton = new Button(By.xpath("//div[@class='b-top-profile__name']"), "User's profile ");
+	Link walletNewsLink = new Link(By.xpath("//a[text()='Кошелек']"), "Wallet news page ");
+	Image usersAvatarImage = new Image(By.cssSelector(".js-header-user-avatar"), "User's avatar");
 	Button logoutButton = new Button(By.xpath("//a[contains(text(), 'Выйти')]"), "Logout ");
-	Link weatherPageLink = new Link(By.xpath("//a[@href='https://pogoda.onliner.by/']"), "Weather page");
-	Button itemsButton = new Button(By.xpath("//div[@class = 'result__item result__item_product']"), "Items");
+	Link weatherPageLink = new Link(By.cssSelector(".js-weather-icon"), "Weather page");
+	IFrame listOfOffersIframe = new IFrame(By.xpath("//iframe[@class = 'modal-iframe']"), "List of offers");
+	Link firstOfferLink = new Link(By.xpath("//div[@class = 'result__wrapper']"), "First offer");
 
 	public MainPage() {
 		super(By.xpath("//img[@alt='Onlíner']"), "Onlíner's mainpage");
+		waitForPageOpen();
 	}
 
-	public void searchItem(String value) {
+	public void typeItemNameIntoSearchField(String value) {
 		searchField.typeInField(value);
-
 	}
 
-	public void openLoginForm() {
+	public void clickOnLoginFormLink() {
 		loginLink.followLink();
 	}
 
-	public void openUserMenu() {
+	public void clickOnUserMenuButton() {
 		userMenuButton.click();
 	}
 
-	public void openBasket() {
+	public void clickOnBasketPageLink() {
 		basketLink.followLink();
 	}
 
-	public void openCatalog() {
+	public void clickOnCatalogLink() {
 		catalogLink.followLink();
 	}
 
-	public void openUsersProfile() {
+	public void clickOnUsersProfileButton() {
 		profileButton.click();
 	}
 
@@ -56,7 +51,7 @@ public class MainPage extends BasePage{
 	}
 
 	public void logout() {
-		openUserMenu();
+		clickOnUserMenuButton();
 		logoutButton.clickOnButton();
 	}
 
@@ -64,21 +59,20 @@ public class MainPage extends BasePage{
 		return loginLink.isEnabled();
 	}
 
-	public void openWeatherPage() {
+	public void clickOnWeatherPageLink() {
 		weatherPageLink.followLink();
 	}
 
-	public void openWalletNews() {
+	public void clickOnWalletNewsLink() {
 		walletNewsLink.followLink();
 	}
 
-	public void openFirstItem() {
-		if (itemsButton.isPresent(DEFAULT_TIMEOUT)) {
-			itemsButton.clickOnButton();
-		} else {
-			searchField.typeInField(Keys.DOWN);
-			searchField.typeInField(Keys.ENTER);
-		}
+	public void clickOnFirstOffer() {
+		firstOfferLink.click();
+	}
+
+	public void switchToOfferList() {
+		listOfOffersIframe.switchToIframe();
 	}
 
 }

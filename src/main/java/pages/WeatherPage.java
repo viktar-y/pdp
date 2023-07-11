@@ -16,8 +16,19 @@ public class WeatherPage extends BasePage{
 		super(By.xpath("//p[contains(text(), 'Сейчас в')]"), "Weather page");
 	}
 
-	public String getCurrentTemperatureText() {
+	public String getCurrentTemperatureValue() {
 		return currentTempLabel.getLabelText().replaceAll("[^-+0-9]", "");
+	}
+
+	public boolean isCurrentTemperatureShown() {
+		return currentTempLabel.isPresent();
+	}
+
+	public boolean areDailyTemperaturesShown() {
+		return morningTempLabel.isPresent() &&
+				afternoonTempLabel.isPresent() &&
+				eveningTempLabel.isPresent() &&
+				nightTempLabel.isPresent();
 	}
 
 	public double getAVGTemperatureValue() {

@@ -3,99 +3,93 @@ package searchTests;
 import core.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
-import pages.*;
+
+
+import static properties.Properties.*;
 
 public class SearchFromCatalogTests extends BaseTest {
 
 	@Test
-	public void openCatalogTest() {
-		new MainPage().openCatalog();
-		CatalogPage catalogPage = new CatalogPage();
+	public void checkCatalogOpeningTest() {
+		mainPage.clickOnCatalogLink();
+		catalogPage.waitForPageOpen();
 		Assertions.assertTrue(catalogPage.isElectronicSectionShown());
 	}
 
 	@Test
-	public void openSmartphonesPageTest() {
-		openCatalogTest();
-		CatalogPage catalogPage = new CatalogPage();
-		catalogPage.openElectronicSections();
-		catalogPage.openMobileSection();
-		catalogPage.openSmartphonesPage();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
+	public void checkSmartphonesPageOpeningTest() {
+		checkCatalogOpeningTest();
+		catalogPage.clickOnElectronicSections();
+		catalogPage.clickOnMobileSection();
+		catalogPage.clickOnSmartphonesPage();
+		mobilePhonesPage.waitForPageOpen();
 		Assertions.assertTrue(mobilePhonesPage.isSmartphoneTagShown());
 	}
 
 	@Test
-	public void addToBasketMostExpensivePhoneTest() {
-		openSmartphonesPageTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
-		mobilePhonesPage.expandSortingMenu();
-		mobilePhonesPage.chooseMostExpensiveSortingOption();
-		mobilePhonesPage.openItem();
-		ItemPage itemPage = new ItemPage();
+	public void checkAdditionToBasketMostExpensivePhoneTest() {
+		checkSmartphonesPageOpeningTest();
+		mobilePhonesPage.expandSortingMenuDropdown();
+		mobilePhonesPage.clickOnMostExpensiveSortingOption();
+		mobilePhonesPage.clickOnOpenItemButton();
+		itemPage.waitForPageOpen();
 		String descriptionItemPage = itemPage.getItemDescription();
-		itemPage.addItemToBasket();
+		itemPage.clickOnAddItemToBasketButton();
 		itemPage.refreshPage();
-		new MainPage().openBasket();
-		BasketPage basketPage = new BasketPage();
+		mainPage.clickOnBasketPageLink();
+		basketPage.waitForPageOpen();
 		String descriptionBasketPage = basketPage.getBasketItemDescription();
 		Assertions.assertEquals(descriptionBasketPage, descriptionItemPage);
 	}
 
 	@Test
-	public void changeDeliveryDestinationTest() {
-		openSmartphonesPageTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
-		mobilePhonesPage.openChangeDestinationWindow();
-		String city = "Бобруйск";
-		mobilePhonesPage.enterNewDestination(city);
-		Assertions.assertEquals(city, mobilePhonesPage.getTextDelivery());
+	public void checkDeliveryDestinationChangingTest() {
+		checkSmartphonesPageOpeningTest();
+		mobilePhonesPage.clickOnChangeDestinationWindow();
+		mobilePhonesPage.enterNewDestination(CITY);
+		mobilePhonesPage.clickOnCityFromList();
+		mobilePhonesPage.clickConfirmChoiceCityFromList();
+		Assertions.assertEquals(CITY, mobilePhonesPage.getTextDelivery());
 
 	}
 
 	@Test
-	public void searchPrimeItemsTest() {
-		openSmartphonesPageTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
+	public void checkOnlyPrimeItemsSearchingTest() {
+		checkSmartphonesPageOpeningTest();
 		int countOfDealsBeforeChanging = mobilePhonesPage.getCountOfDeals();
-		mobilePhonesPage.choosePrimeItems();
+		mobilePhonesPage.clickOnPrimeItemsButton();
 		int countOfDealsAfterChanging = mobilePhonesPage.getCountOfDeals();
 		Assertions.assertTrue(mobilePhonesPage.isPrimeLabelShown());
 		Assertions.assertNotEquals(countOfDealsAfterChanging, countOfDealsBeforeChanging);
 	}
 
 	@Test
-	public void removePrimeSearchOptionTest() {
-		searchPrimeItemsTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
+	public void checkPrimeSearchOptionRemovingTest() {
+		checkOnlyPrimeItemsSearchingTest();
 		int countOfDealsBeforeChanging = mobilePhonesPage.getCountOfDeals();
-		mobilePhonesPage.removePrimeLabel();
+		mobilePhonesPage.clickOnRemovePrimeTag();
 		int countOfDealsAfterChanging = mobilePhonesPage.getCountOfDeals();
 		Assertions.assertFalse(mobilePhonesPage.isPrimeLabelShown());
 		Assertions.assertNotEquals(countOfDealsBeforeChanging, countOfDealsAfterChanging);
 	}
 
 	@Test
-	public void resetAllSearchCriteriaTest() {
-		openSmartphonesPageTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
+	public void checkResetAllSearchCriteriaTest() {
+		checkSmartphonesPageOpeningTest();
 		int countDealsBefore = mobilePhonesPage.getCountOfDeals();
-		mobilePhonesPage.resetAllSearchCriteria();
+		mobilePhonesPage.clickOnResetAllSearchCriteriaButton();
 		Assertions.assertFalse(mobilePhonesPage.isSmartphoneTagShown());
 		int countDealsAfter = mobilePhonesPage.getCountOfDeals();
 		Assertions.assertNotEquals(countDealsAfter, countDealsBefore);
 	}
 
 	@Test
-	public void choosePhoneInPriceRangeTest() {
-		resetAllSearchCriteriaTest();
-		MobilePhonesPage mobilePhonesPage = new MobilePhonesPage();
+	public void checkChoosingPhoneInPriceRangeTest() {
+		checkResetAllSearchCriteriaTest();
 		int countDealsBefore = mobilePhonesPage.getCountOfDeals();
-		int priceFrom = 1000;
-		int priceTo = 2000;
-		mobilePhonesPage.choosePriceFrom(priceFrom);
-		mobilePhonesPage.choosePriceTo(priceTo);
-		Assertions.assertEquals(priceFrom + "" + priceTo, mobilePhonesPage.getTagText());
+		mobilePhonesPage.typeValueIntoPriceFromField(PRICE_FROM);
+		mobilePhonesPage.typeValueIntoPriceToField(PRICE_TO);
+		Assertions.assertEquals(PRICE_FROM + "" + PRICE_TO, mobilePhonesPage.getTagText());
 		int countDealsAfter = mobilePhonesPage.getCountOfDeals();
 		Assertions.assertNotEquals(countDealsBefore, countDealsAfter);
 	}

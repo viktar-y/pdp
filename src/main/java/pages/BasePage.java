@@ -14,10 +14,9 @@ abstract class BasePage {
 	BasePage(By locator, String name) {
 		this.locator = locator;
 		this.name = name;
-		isPageOpen();
 	}
 
-	private void isPageOpen() {
+	public void waitForPageOpen() {
 		Label elem = new Label(locator, name);
 		try {
 			elem.waitForIsElementPresent();

@@ -2,74 +2,73 @@ package pages;
 
 import core.elements.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
-import static properties.Properties.DEFAULT_TIMEOUT;
 
 public class MobilePhonesPage extends BasePage {
 	DropDown sortMenuDropDown = new DropDown(By.xpath("//a[@class = 'schema-order__link']"), "Sort button");
 	Button mostExpensiveOptionButton = new Button(By.xpath("//span[contains(text(), 'Дорогие')]"), "Most Expensive ");
-	Button resetFiltersButton = new Button(By.xpath("//span[@data-bind = 'click: $root.doMoved.bind($root)']"), "Reset all filters");
-	Button addPrime = new Button(By.xpath("//label[@class='schema-filter__bonus-item schema-filter__bonus-item_primary']"), "Button add Prime");
+	Button resetFiltersButton = new Button(By.cssSelector(".schema-filter-button__sub_control"), "Reset all filters");
+	Button addPrime = new Button(By.cssSelector(".schema-filter__bonus-item_primary"), "Button add Prime");
 	Tag primeTag = new Tag(By.xpath("//span[@class='schema-tags__text' and text()='Príme']"), "Prime label");
-	Link chooseDeliveryDestinationLink = new Link(By.xpath("//span[@class = 'schema-filter__link schema-filter__link_secondary schema-filter__link_small']"), "Delivery destination");
-	Link changedCity = new Link(By.xpath("//a[@class = 'schema-filter__link schema-filter__link_primary-alter schema-filter__link_small-alter schema-filter__link_nodecor']"), "Changed city");
-	TextField inputCityField = new TextField(By.xpath("//input[@placeholder = 'Укажите ваш населенный пункт']"), "City input");
+	Link chooseDeliveryDestinationLink = new Link(By.cssSelector(".schema-filter__link_secondary"), "Delivery destination");
+	Link changedCity = new Link(By.cssSelector(".schema-filter__link_nodecor"), "Changed city");
+	TextField inputCityField = new TextField(By.cssSelector(".auth-input"), "City input");
 	Button confirmChangeDestination = new Button(By.xpath("//button[contains(@class, 'auth-button')]"), "Change destination");
-	TextField priceFromField = new TextField(By.xpath("//input[contains(@placeholder, 'от') and contains(@class, 'schema-filter__number-input_price')]"), "Price from field");
-	TextField priceToField = new TextField(By.xpath("//input[contains(@data-bind, 'до') and contains(@class, 'number-input_price')]"), "Price to field");
+	TextField priceFromField = new TextField(By.cssSelector("input.schema-filter__number-input[placeholder='от']"), "Price from field");
+	TextField priceToField = new TextField(By.cssSelector("input.schema-filter__number-input[placeholder='до']"), "Price to field");
 	Tag searchTag = new Tag(By.xpath("//span[@class = 'schema-tags__text']"), "search tag");
-	Tag smartphoneTag = new Tag(By.xpath("//span[@class='schema-tags__text' and text()='смартфон']"), "Smartphone tag");
-	Label countOfItems = new Label(By.xpath("//span[@class = 'schema-filter-button__sub schema-filter-button__sub_main']"), "Count of deals");
-	Button openItemButton = new Button(By.xpath("//a[@class='schema-product__button button button_orange js-product-price-link']"), "Open item button");
+	Tag smartphoneTag = new Tag(By.xpath("//span[contains(@class, 'schema-tags__text') and text()='смартфон']"), "Smartphone tag");
+	Label countOfItems = new Label(By.cssSelector(".schema-filter-button__sub_main"), "Count of deals");
+	Button openItemButton = new Button(By.cssSelector(".button.js-product-price-link"), "Open item button");
 	Button confirmFilterReset = new Button(By.xpath("//span[@class='schema-filter-button__sub']"), "Confirm reset");
-	MenuButton cityOfferedMenuButton = new MenuButton(By.xpath("//div[@class = 'auth-dropdown_container']"), "City offered");
-	Image countOfItemsUploading = new Image(By.xpath("//div[contains(@class, 'schema-filter-button__state_animated')]"), "Count of deals with uploading");
+	Image countOfItemsUploading = new Image(By.cssSelector(".schema-filter-button__state_animated"), "Count of deals with uploading");
+	Button cityFromList = new Button(By.cssSelector(".auth-dropdown__container"), "Cty from list");
 
 	public MobilePhonesPage() {
 		super(By.xpath("//h1"), "Mobile phones page");
 	}
 
 	public boolean isSmartphoneTagShown() {
-		return smartphoneTag.isPresent(DEFAULT_TIMEOUT);
+		return smartphoneTag.isPresent();
 	}
 
-	public void expandSortingMenu() {
+	public void expandSortingMenuDropdown() {
 		sortMenuDropDown.expandDropDown();
 	}
 
-	public void chooseMostExpensiveSortingOption() {
+	public void clickOnMostExpensiveSortingOption() {
 		mostExpensiveOptionButton.clickOnButton();
 	}
 
-	public void openItem() {
+	public void clickOnOpenItemButton() {
 		openItemButton.clickOnButton();
 	}
 
-	public void openChangeDestinationWindow() {
+	public void clickOnChangeDestinationWindow() {
 		chooseDeliveryDestinationLink.followLink();
 	}
 
 	public void enterNewDestination(String value) {
 		inputCityField.typeInField(value);
-		if (cityOfferedMenuButton.isPresent(DEFAULT_TIMEOUT)) {
-			cityOfferedMenuButton.clickMenuButton();
-		} else {
-			inputCityField.typeInField(Keys.DOWN);
-			inputCityField.typeInField(Keys.ENTER);
-			confirmChangeDestination.clickOnButton();
-		}
 	}
 
-	public void choosePrimeItems() {
+	public void clickOnCityFromList() {
+		cityFromList.clickOnButton();
+	}
+
+	public void clickConfirmChoiceCityFromList() {
+		confirmChangeDestination.clickOnButton();
+	}
+
+	public void clickOnPrimeItemsButton() {
 		addPrime.clickOnButton();
 	}
 
 	public boolean isPrimeLabelShown() {
-		return primeTag.isPresent(DEFAULT_TIMEOUT);
+		return primeTag.isPresent();
 	}
 
-	public void removePrimeLabel() {
+	public void clickOnRemovePrimeTag() {
 		primeTag.clickOnTag();
 	}
 
@@ -78,7 +77,7 @@ public class MobilePhonesPage extends BasePage {
 	}
 
 	public int getCountOfDeals() {
-		if (countOfItemsUploading.isPresent(DEFAULT_TIMEOUT)) {
+		if (countOfItemsUploading.isPresent()) {
 			countOfItems.waitForIsElementPresent();
 		}
 		String count;
@@ -88,17 +87,17 @@ public class MobilePhonesPage extends BasePage {
 		return Integer.parseInt(count);
 	}
 
-	public void resetAllSearchCriteria() {
+	public void clickOnResetAllSearchCriteriaButton() {
 		resetFiltersButton.clickOnButton();
 		confirmFilterReset.clickOnButton();
 	}
 
-	public void choosePriceFrom(int value) {
-		priceFromField.typeInField(String.valueOf(value));
+	public void typeValueIntoPriceFromField(String value) {
+		priceFromField.typeInField(value);
 	}
 
-	public void choosePriceTo(int value) {
-		priceToField.typeInField(String.valueOf(value));
+	public void typeValueIntoPriceToField(String value) {
+		priceToField.typeInField(value);
 	}
 
 	public String getTagText() {

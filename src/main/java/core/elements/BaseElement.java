@@ -29,7 +29,7 @@ public class BaseElement {
 	}
 
 	public void waitForIsElementPresent() {
-		isPresent(DEFAULT_TIMEOUT);
+		isPresent();
 		if (!element.isEnabled()) {
 			new WebDriverWait(browser.getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT))
 					.until(ExpectedConditions.visibilityOf(element));
@@ -57,8 +57,8 @@ public class BaseElement {
 					  .isEnabled();
 	}
 
-	public boolean isPresent(int timeout) {
-		WebDriverWait wait = new WebDriverWait(Browser.getInstance().getDriver(), Duration.ofSeconds(timeout));
+	public boolean isPresent() {
+		WebDriverWait wait = new WebDriverWait(Browser.getInstance().getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT));
 		browser.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
 			wait.until((ExpectedCondition<Boolean>) driver -> {
