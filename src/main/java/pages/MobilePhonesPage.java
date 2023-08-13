@@ -6,21 +6,21 @@ import org.openqa.selenium.By;
 
 public class MobilePhonesPage extends BasePage {
 	DropDown sortMenuDropDown = new DropDown(By.xpath("//a[@class = 'schema-order__link']"), "Sort button");
-	Button mostExpensiveOptionButton = new Button(By.xpath("//span[contains(text(), 'Дорогие')]"), "Most Expensive ");
+	Button mostExpensiveOptionButton = new Button(By.xpath("//*[contains(text(), 'Дорогие')]"), "Most Expensive ");
 	Button resetFiltersButton = new Button(By.cssSelector(".schema-filter-button__sub_control"), "Reset all filters");
 	Button addPrime = new Button(By.cssSelector(".schema-filter__bonus-item_primary"), "Button add Prime");
-	Tag primeTag = new Tag(By.xpath("//span[@class='schema-tags__text' and text()='Príme']"), "Prime label");
+	Tag primeTag = new Tag(By.xpath("//*[@class='schema-tags__text' and text()='Príme']"), "Prime label");
 	Link chooseDeliveryDestinationLink = new Link(By.cssSelector(".schema-filter__link_secondary"), "Delivery destination");
 	Link changedCity = new Link(By.cssSelector(".schema-filter__link_nodecor"), "Changed city");
 	TextField inputCityField = new TextField(By.cssSelector(".auth-input"), "City input");
-	Button confirmChangeDestination = new Button(By.xpath("//button[contains(@class, 'auth-button')]"), "Change destination");
+	Button confirmChangeDestination = new Button(By.xpath("//*[contains(@class, 'auth-button')]"), "Change destination");
 	TextField priceFromField = new TextField(By.cssSelector("input.schema-filter__number-input[placeholder='от']"), "Price from field");
 	TextField priceToField = new TextField(By.cssSelector("input.schema-filter__number-input[placeholder='до']"), "Price to field");
-	Tag searchTag = new Tag(By.xpath("//span[@class = 'schema-tags__text']"), "search tag");
-	Tag smartphoneTag = new Tag(By.xpath("//span[contains(@class, 'schema-tags__text') and text()='смартфон']"), "Smartphone tag");
+	Tag searchTag = new Tag(By.xpath("//*[@class = 'schema-tags__text']"), "search tag");
+	Tag smartphoneTag = new Tag(By.xpath("//*[contains(@class, 'schema-tags__text') and text()='смартфон']"), "Smartphone tag");
 	Label countOfItems = new Label(By.cssSelector(".schema-filter-button__sub_main"), "Count of deals");
 	Button openItemButton = new Button(By.cssSelector(".button.js-product-price-link"), "Open item button");
-	Button confirmFilterReset = new Button(By.xpath("//span[@class='schema-filter-button__sub']"), "Confirm reset");
+	Button confirmFilterReset = new Button(By.xpath("//*[@class='schema-filter-button__sub']"), "Confirm reset");
 	Image countOfItemsUploading = new Image(By.cssSelector(".schema-filter-button__state_animated"), "Count of deals with uploading");
 	Button cityFromList = new Button(By.cssSelector(".auth-dropdown__container"), "Cty from list");
 

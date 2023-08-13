@@ -5,11 +5,11 @@ import core.elements.Label;
 import org.openqa.selenium.By;
 
 public class WeatherPage extends BasePage{
-	Label morningTempLabel = new Label(By.xpath("//dt[text()='утром']/following-sibling::dd/span[@class='value']"), "Morning temperature");
-	Label afternoonTempLabel = new Label(By.xpath("//dt[text()='днем']/following-sibling::dd/span[@class='value']"), "Afternoon temperature");
-	Label eveningTempLabel = new Label(By.xpath("//dt[text()='вечером']/following-sibling::dd/span[@class='value']"), "Evening temperature");
-	Label nightTempLabel = new Label(By.xpath("//dt[text()='ночью']/following-sibling::dd/span[@class='value']"), "Night temperature");
-	Label currentTempLabel = new Label(By.xpath("//span[@class = 'grad']"), "Current temperature");
+	Label morningTempLabel = new Label(By.xpath("//*[text()='утром']/following-sibling::*/*[@class='value']"), "Morning temperature");
+	Label afternoonTempLabel = new Label(By.xpath("//*[text()='днем']/following-sibling::*/*[@class='value']"), "Afternoon temperature");
+	Label eveningTempLabel = new Label(By.xpath("//*[text()='вечером']/following-sibling::*/*[@class='value']"), "Evening temperature");
+	Label nightTempLabel = new Label(By.xpath("//*[text()='ночью']/following-sibling::*/*[@class='value']"), "Night temperature");
+	Label currentTempLabel = new Label(By.xpath("//*[@class = 'grad']"), "Current temperature");
 	Button weatherCityButton = new Button((By.xpath("//a[@class = 'js-weather-city']")), "City of shown weather");
 
 	public WeatherPage() {

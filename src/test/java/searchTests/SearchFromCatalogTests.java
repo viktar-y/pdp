@@ -3,6 +3,7 @@ package searchTests;
 import core.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
+import utils.StringUtils;
 
 
 import static properties.Properties.*;
@@ -38,8 +39,7 @@ public class SearchFromCatalogTests extends BaseTest {
 		itemPage.refreshPage();
 		mainPage.clickOnBasketPageLink();
 		basketPage.waitForPageOpen();
-		String descriptionBasketPage = basketPage.getBasketItemDescription();
-		Assertions.assertEquals(descriptionBasketPage, descriptionItemPage);
+		Assertions.assertEquals(basketPage.getBasketItemDescription(), descriptionItemPage);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class SearchFromCatalogTests extends BaseTest {
 		int countDealsBefore = mobilePhonesPage.getCountOfDeals();
 		mobilePhonesPage.typeValueIntoPriceFromField(PRICE_FROM);
 		mobilePhonesPage.typeValueIntoPriceToField(PRICE_TO);
-		Assertions.assertEquals(PRICE_FROM + "" + PRICE_TO, mobilePhonesPage.getTagText());
+		Assertions.assertEquals(StringUtils.getPriceRangeInString(), mobilePhonesPage.getTagText());
 		int countDealsAfter = mobilePhonesPage.getCountOfDeals();
 		Assertions.assertNotEquals(countDealsBefore, countDealsAfter);
 	}

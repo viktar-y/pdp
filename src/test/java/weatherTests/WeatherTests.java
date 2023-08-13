@@ -21,16 +21,16 @@ public class WeatherTests extends BaseTest {
 	public void checkCurrentTemperatureIsShownTest() {
 		checkWeatherPageOpeningTest();
 		String currentTemperature = weatherPage.getCurrentTemperatureValue();
-		Assertions.assertTrue(weatherPage.isCurrentTemperatureShown());
 		FileProcessor.writeValueToFile(currentTemperature, CURRENT_TEMP_FILE_PATH);
+		Assertions.assertTrue(weatherPage.isCurrentTemperatureShown());
 	}
 
 	@Test
 	public void checkWeeklyTemperatureIsShownTest() {
 		checkWeatherPageOpeningTest();
 		double currentTemperature = weatherPage.getAVGTemperatureValue();
-		Assertions.assertTrue(weatherPage.areDailyTemperaturesShown());
 		FileProcessor.writeValueToFile(String.valueOf(currentTemperature), AVG_TEMP_FILE_PATH);
+		Assertions.assertTrue(weatherPage.areDailyTemperaturesShown());
 	}
 
 }
