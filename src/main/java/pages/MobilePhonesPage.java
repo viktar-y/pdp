@@ -104,4 +104,8 @@ public class MobilePhonesPage extends BasePage {
 		return searchTag.getTextFromTag().replaceAll("[^0-9]", "");
 	}
 
+	public void openSmartphonePageInNewTab() {
+		openItemButton.openElementInNewTab();
+	}
+
 }

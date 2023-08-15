@@ -11,5 +11,6 @@ public class Properties {
 	public static String CITY = PropertyReader.findProperty("CITY");
 	public static String PRICE_FROM = PropertyReader.findProperty("PRICE_FROM");
 	public static String PRICE_TO = PropertyReader.findProperty("PRICE_TO");
+	public static String DRAG_AND_DROP_PAGE = PropertyReader.findProperty("DRAG_AND_DROP_PAGE");
 
 }

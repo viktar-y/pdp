@@ -5,6 +5,8 @@ import core.Logger;
 import core.elements.Label;
 import org.openqa.selenium.By;
 
+import static properties.Properties.DRAG_AND_DROP_PAGE;
+
 
 abstract class BasePage {
 	private final By locator;

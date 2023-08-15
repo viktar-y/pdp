@@ -94,4 +94,14 @@ public class SearchFromCatalogTests extends BaseTest {
 		Assertions.assertNotEquals(countDealsBefore, countDealsAfter);
 	}
 
+	@Test
+	public void checkOpeningMostExpensivePhoneInNewTabTest() {
+		checkSmartphonesPageOpeningTest();
+		checkSmartphonesPageOpeningTest();
+		mobilePhonesPage.expandSortingMenuDropdown();
+		mobilePhonesPage.clickOnMostExpensiveSortingOption();
+		mobilePhonesPage.openSmartphonePageInNewTab();
+		Assertions.assertTrue(itemPage.isItemImageShown());
+	}
+
 }

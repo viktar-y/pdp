@@ -51,6 +51,11 @@ public class BaseElement {
 		return browser.getDriver().findElements(locator);
 	}
 
+	public RemoteWebElement getElement() {
+		waitForIsElementPresent();
+		return element;
+	}
+
 	public boolean isEnabled() {
 		return browser.getDriver()
 					  .findElement(locator)
@@ -88,6 +93,19 @@ public class BaseElement {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public String getElementUrl() {
+		waitForIsElementPresent();
+		logger.info(String.format("Get %s element URL", name));
+		return element.getAttribute("href");
+	}
+
+	public void openElementInNewTab() {
+		String elementUrl = getElementUrl();
+		browser.openNewTab();
+		browser.switchToNextTab();
+		browser.navigate(elementUrl);
 	}
 
 }

@@ -17,6 +17,7 @@ public class BaseTest {
 	public MobilePhonesPage mobilePhonesPage;
 	public WalletNewsPage walletNewsPage;
 	public WeatherPage weatherPage;
+	public DragDropPage dragDropPage;
 
 	@BeforeTest
 	public void beforeTest() {
@@ -37,6 +38,7 @@ public class BaseTest {
 		mobilePhonesPage = new MobilePhonesPage();
 		walletNewsPage = new WalletNewsPage();
 		weatherPage = new WeatherPage();
+		dragDropPage = new DragDropPage();
 	}
 
 	@AfterTest

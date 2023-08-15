@@ -1,5 +1,6 @@
 package core;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -47,4 +48,15 @@ public class Browser {
 	public void refreshPage() {
 		driver.navigate().refresh();
 	}
+
+	public void openNewTab() {
+		((JavascriptExecutor) driver).executeScript("window.open()");
+	}
+
+	public void switchToNextTab() {
+		for (String handle : driver.getWindowHandles()) {
+			driver.switchTo().window(handle);
+		}
+	}
+
 }

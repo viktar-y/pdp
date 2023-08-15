@@ -1,7 +1,10 @@
 package pages;
 
+import core.Browser;
 import core.elements.*;
 import org.openqa.selenium.By;
+
+import static properties.Properties.DRAG_AND_DROP_PAGE;
 
 public class MainPage extends BasePage{
 	TextField searchField = new TextField(By.xpath("//*[contains(@class, 'fast-search__input')]"), "Search field");
@@ -75,4 +78,7 @@ public class MainPage extends BasePage{
 		listOfOffersIframe.switchToIframe();
 	}
 
+	public void openDragAndDropPage() {
+		Browser.getInstance().navigate(DRAG_AND_DROP_PAGE);
+	}
 }
