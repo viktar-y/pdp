@@ -14,7 +14,7 @@ public class SearchFromCatalogTests extends BaseTest {
 	public void checkCatalogOpeningTest() {
 		mainPage.clickOnCatalogLink();
 		catalogPage.waitForPageOpen();
-		Assertions.assertTrue(catalogPage.isElectronicSectionShown());
+		Assertions.assertTrue(catalogPage.isElectronicSectionEnabled());
 	}
 
 	@Test

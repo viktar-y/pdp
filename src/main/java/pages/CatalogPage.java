@@ -24,7 +24,7 @@ public class CatalogPage extends BasePage{
 		smartphonesPage.click();
 	}
 
-	public boolean isElectronicSectionShown() {
+	public boolean isElectronicSectionEnabled() {
 		return electronicSection.isEnabled();
 	}
 

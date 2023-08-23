@@ -10,7 +10,7 @@ public class BelarusianLanguageNewsPage extends BasePage{
 		super(By.xpath("//*[text()='Onliner па-беларуску']"), "Onliner on Belarusian");
 	}
 
-	public boolean isYShown() {
+	public boolean isYNeskladovajeEnabled() {
 		return yNeskladovajeImage.isEnabled();
 	}
 

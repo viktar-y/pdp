@@ -12,7 +12,7 @@ public class WalletNewsTests extends BaseTest {
 		walletNewsPage.waitForPageOpen();
 		walletNewsPage.clickOnBelarusianLanguageNewsButton();
 		belarusianLanguageNewsPage.waitForPageOpen();
-		Assertions.assertTrue(belarusianLanguageNewsPage.isYShown());
+		Assertions.assertTrue(belarusianLanguageNewsPage.isYNeskladovajeEnabled());
 	}
 
 }
