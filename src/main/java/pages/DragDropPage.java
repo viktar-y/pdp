@@ -14,7 +14,7 @@ public class DragDropPage extends BasePage {
     private final DragAndDropElement rightColumnReverted = new DragAndDropElement(By.xpath("//div[@id = 'column-b'][header = 'A']"), "Column A Reverted");
 
     public DragDropPage() {
-        super(By.xpath("//h3"), "Drag and Drop");
+        super(By.xpath("//*[text() = 'Drag and Drop']"), "Drag and Drop");
     }
 
     public void makeLeftElementDragAndDropToRight() {
